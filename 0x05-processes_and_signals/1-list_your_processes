@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 # This script display a loist of all running processes
-ps -uhe
+ps -ue --forest
 
