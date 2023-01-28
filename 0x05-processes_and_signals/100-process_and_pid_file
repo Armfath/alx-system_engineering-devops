@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Combinatination
+echo $$ >> /var/run/myscript.pid
+while true; do
+	echo "To infinity and beyond"
+	sleep 2
+	trap "echo I hate the kill command" TERM
+	trap "echo Y U no love me?" INT
+	trap "rm /var/run/myscript.pid; pkill -f 100-process_and_pid_file" QUIT TERM
+done
+
