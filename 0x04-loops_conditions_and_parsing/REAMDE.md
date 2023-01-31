@@ -1,0 +1,1 @@
+Loops conditions in Bash
