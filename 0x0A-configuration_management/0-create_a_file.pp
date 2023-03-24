@@ -1,3 +1,4 @@
+# create the file school in /tmp with the conten 'I love Puppet'
 file { '/tmp/school':
   ensure  => file,
   owner   => 'www-data',
