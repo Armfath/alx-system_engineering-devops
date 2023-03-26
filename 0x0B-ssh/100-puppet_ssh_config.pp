@@ -1,8 +1,9 @@
 # ssh file configuration config
-class { 'ssh::client::config::host':
-  '54.160.65.217':
-    user                  => 'ubuntu',
-    identity              => '~/.ssh/school',
-    stricthostkeychecking => 'no',
-    batchmode             => 'yes',
+file_line { 'disable password login':
+  path => '/etc/ssh/ssh_config',
+  line => 'PasswordAuthentication no',
+}
+file_line { 'add path to find the keys':
+  path => '/etc/ssh/ssh_config',
+  line => 'IdentityFile ~/.ssh/school',
 }
