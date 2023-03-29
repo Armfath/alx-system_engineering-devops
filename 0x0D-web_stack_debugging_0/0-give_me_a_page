@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# gets Apache to run on container and return a page containing Hello Holberton when querying the root of it
+# gets Apache to run on containe
 
 apt-get update
 apt-get install apache2 -y
