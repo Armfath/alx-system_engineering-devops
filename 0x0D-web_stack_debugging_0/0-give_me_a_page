@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# gets Apache to run on container and return a page containing Hello Holberton when querying the root of it
+
+dpkg -s apache2 &> /dev/null
+if [ $? -ne 0 ]; then
+	sudo apt-get update
+	sudo apt-get install apache2 -y
+	sudo ufw allow 'Apache'
+fi
+
+service apache2 status &> /dev/null
+if [ $? -ne 0 ]; then
+	service apache2 start &> /dev/null
+fi
+
+chmod "664" /var/www/html/index.html
+echo 'Hello Holberton' > /var/www/html/index.html
