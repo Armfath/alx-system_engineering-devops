@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# install and config ngnix in my sever
+
+apt-get -y install nginx
+service nginx start
+echo "server {
+    listen 80;
+    listen [::]:80;
+
+    root /var/www/html;
+    index index.html;
+
+    server_name localhost;
+
+    location / {
+        try_files $uri $uri/ =404;
+        add_header Content-Type "text/html";
+        return 200 "Hello World!";
+    }
+}" > /etc/nginx/sites-available/default
+service nginx restart
