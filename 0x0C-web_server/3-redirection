@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 #config a permanat redirection
 
-new_string="\n\trewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;\n\t}"
-sed -i "\$s|.*|$new_string|" /etc/nginx/sites-available/default
-sudo service nginx restart
+old_str="#here_redirect_config"
+redirect_path="location /redirect_me {\n\t\treturn 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n\t}"
+sed -i "s|$old_str|$redirect_path|" /etc/nginx/sites-available/default
+service nginx restart
