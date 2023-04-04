@@ -11,8 +11,8 @@ echo "server {
 	index index.html;
 
 	location / {
-		add_header X-Served-By $hostname;
-		try_files $uri $uri/ =404;
+		add_header X-Served-By \$hostname;
+		try_files \$uri \$uri/ =404;
 	}
 
 	# redirection config
@@ -28,3 +28,4 @@ echo "server {
 }" > /etc/nginx/sites-available/default
 echo 'Hello World!' > /var/www/html/index.html
 echo "Ceci n'est pas une page" > /var/www/html/custom_404.html
+service nginx restart
