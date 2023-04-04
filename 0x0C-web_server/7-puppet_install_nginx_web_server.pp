@@ -1,23 +1,5 @@
-# install nginx and custom index.page 404.html
-class nginx {
-  package { 'nginx':
-    ensure => installed,
-  }
-
-  file { '/etc/nginx/sites-available/default':
-    content => template('nginx/default.erb'),
-    notify  => Service['nginx'],
-  }
-
-  file { '/var/www/html/index.html':
-    content => 'Hello World!\n',
-  }
-
-  file { '/var/www/html/custom_404.html':
-    content => "Ceci n'est pas une page\n",
-  }
-
-  service { 'nginx':
-    ensure => running,
-  }
+# Install Nginx web server (w/ Puppet)
+exec { 'server configuration':
+  provider => shell,
+  command  => 'sudo apt-get -y update; sudo apt-get -y install nginx; echo "Hello World!" > /var/www/html/index.html; sudo sed -i "/server_name _;/a location /redirect_me {\\n\\treturn 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\\n\\t}\\n" /etc/nginx/sites-available/default; sudo service nginx restart',
 }
