@@ -1,31 +1,22 @@
-# install nginx and custom index.page 404.html
-package { 'nginx':
-  ensure => installed,
-}
-file { '/etc/nginx/sites-available/default':
-  content => "server {
-	listen 80 default_server;
-	listen [::]:80 default_server;
+class nginx {
+  package { 'nginx':
+    ensure => installed,
+  }
 
-	root /var/www/html;
-	index index.html;
+  file { '/etc/nginx/sites-available/default':
+    content => template('nginx/default.erb'),
+    notify  => Service['nginx'],
+  }
 
-	# redirection config
-	location /redirect_me {
-		return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
-	}
+  file { '/var/www/html/index.html':
+    content => 'Hello World!\n',
+  }
 
-	# not found page 404
-	error_page 404 /custom_404.html;
-	location = /custom_404.html {
-		internal;
-	}
-}
-",
-}
-file { '/var/www/html/index.html':
-  content => 'Hello World!\n'
-}
-file { '/var/www/html/custom_404.html':
-  content => "Ceci n'est pas une page\n"
+  file { '/var/www/html/custom_404.html':
+    content => "Ceci n'est pas une page\n",
+  }
+
+  service { 'nginx':
+    ensure => running,
+  }
 }
