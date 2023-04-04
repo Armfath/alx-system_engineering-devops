@@ -1,3 +1,4 @@
+# install nginx and custom index.page 404.html
 package { 'nginx':
   ensure => installed,
 }
