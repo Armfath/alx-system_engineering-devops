@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# Install and configure HAproxy on your lb-01 server.
+set -e
+
+# Cleanup function to be called in case of an error
+cleanup() {
+  # Stop HAProxy service
+  service haproxy stop
+}
+trap cleanup ERR
+
+# Install HAProxy
+apt update
+apt install -y haproxy
+
+# Configure HAProxy
+echo "frontend http-in
+  bind *:80
+  default_backend servers
+
+backend servers
+  balance roundrobin
+  server 48518-web-01 100.25.211.4:80 check
+  server 48518-web-02 100.26.234.235:80 check" >> /etc/haproxy/haproxy.cfg
+
+# Configure init script
+service haproxy restart
+
+# Set server hostnames
+echo "127.0.0.1 48518-web-01
+127.0.0.1 48518-web-02" >> /etc/hosts
