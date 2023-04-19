@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# displaies information for a given domain's subdomains www, lb-01, web-01 and web-02
+
+if [ "$2" ]; then
+	sub_dom=$2.$1
+	if [ "$2" == "www" ]; then
+		type=$(dig "$sub_dom" | grep -A1 'ANSWER SECTION:' | awk 'NR==2{print $4}')
+		dest=$(dig +short "$sub_dom")
+		echo The subdomain "$2" is a "$type" record and points to "$dest"
+	elif [ "$2" == "lb-01" ]; then
+		type=$(dig "$sub_dom" | grep -A1 'ANSWER SECTION:' | awk 'NR==2{print $4}')
+                dest=$(dig +short "$sub_dom")
+                echo The subdomain "$2" is a "$type" record and points to "$dest"
+	elif [ "$2" == "web-01" ]; then
+                type=$(dig "$sub_dom" | grep -A1 'ANSWER SECTION:' | awk 'NR==2{print $4}')
+                dest=$(dig +short "$sub_dom")
+                echo The subdomain "$2" is a "$type" record and points to "$dest"
+	elif [ "$2" == "web-02" ]; then
+                type=$(dig "$sub_dom" | grep -A1 'ANSWER SECTION:' | awk 'NR==2{print $4}')
+                dest=$(dig +short "$sub_dom")
+                echo The subdomain "$2" is a "$type" record and points to "$dest"
+	fi
+else
+	for sub in www lb-01 web-01 web-02
+	do
+		type=$(dig "$sub"."$1" | grep -A1 'ANSWER SECTION:' | awk 'NR==2{print $4}')
+		dest=$(dig +short "$sub"."$1")
+		echo The subdomain "$sub" is a "$type" record and points to "$dest"
+	done
+fi
