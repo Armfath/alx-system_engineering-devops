@@ -2,15 +2,16 @@
 """
 Python package requests using to deal with APIs
 """
+
 import requests
 import sys
 
 
 if __name__ == "__main__":
     url = 'https://jsonplaceholder.typicode.com/users/'
-    value = sys.argv[1]
-    todo_r = requests.get(url+f'{value}/todos')
-    info_r = requests.get(url+f'{value}')
+    userID = sys.argv[1]
+    todo_r = requests.get(url+f'{userID}/todos')
+    info_r = requests.get(url+f'{userID}')
     done = []
     for todo in todo_r.json():
         if todo.get('completed') is True:
