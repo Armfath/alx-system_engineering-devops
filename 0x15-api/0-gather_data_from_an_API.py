@@ -3,13 +3,13 @@
 Python script that, using this REST API, for a given employee ID
 '''
 import requests
-from sys import argv
+import sys
 
 if __name__ == "__main__":
     url = 'https://jsonplaceholder.typicode.com/users/'
     userID = sys.argv[1]
-    todo_r = requests.get(url+f'{userID}/todos')
-    info_r = requests.get(url+f'{userID}')
+    todo_r = requests.get('{}{}/todos'.format(url, userID))
+    info_r = requests.get('{}{}'.format(url, userID))
     done = []
     for todo in todo_r.json():
         if todo.get('completed') is True:
