@@ -1,5 +1,8 @@
 #!/usr/bin/python3
-"""Python package requests using to deal with APIs"""
+"""Python package requests using to deal with APIs
+
+Optional plotz says to frobnicate the bizbaz first.
+"""
 
 import requests
 import sys
