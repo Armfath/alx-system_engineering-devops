@@ -17,4 +17,4 @@ if __name__ == "__main__":
     print('Employee {} is done with tasks({}/{}):'
           .format(info_r.json().get('name'), len(done), len(todo_r.json())))
     for task in done:
-        print('\t{}'.format(task.get('title')))
+        print('\t {}'.format(task.get('title')))
