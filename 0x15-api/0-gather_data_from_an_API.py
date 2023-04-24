@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-"""
-Python package requests using to deal with APIs
-"""
+"""Python package requests using to deal with APIs"""
 
 import requests
 import sys
