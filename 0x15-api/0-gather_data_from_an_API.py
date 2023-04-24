@@ -1,9 +1,6 @@
 #!/usr/bin/python3
-# -*- coding: utf-8 -*-
 """
-Created on Mon Sep 14 16:22:14 2020
-
-@author: Robinson Montes
+Python package requests using to deal with APIs
 """
 import requests
 import sys
