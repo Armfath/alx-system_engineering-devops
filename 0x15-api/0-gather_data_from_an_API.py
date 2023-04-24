@@ -1,23 +1,27 @@
 #!/usr/bin/python3
-"""Python package requests using to deal with APIs
-
-Optional plotz says to frobnicate the bizbaz first.
-"""
-
+'''
+Python script that, using this REST API, for a given employee ID
+'''
 import requests
-import sys
-
+from sys import argv
 
 if __name__ == "__main__":
-    url = 'https://jsonplaceholder.typicode.com/users/'
-    userID = sys.argv[1]
-    todo_r = requests.get(url+f'{userID}/todos')
-    info_r = requests.get(url+f'{userID}')
-    done = []
-    for todo in todo_r.json():
-        if todo.get('completed') is True:
-            done.append(todo)
-    print('Employee {} is done with tasks({}/{}):'
-          .format(info_r.json().get('name'), len(done), len(todo_r.json())))
-    for task in done:
-        print('\t{}'.format(task.get('title')))
+    if len(argv) > 1:
+        user = argv[1]
+        url = "https://jsonplaceholder.typicode.com/"
+        req = requests.get("{}users/{}".format(url, user))
+        name = req.json().get("name")
+        if name is not None:
+            jreq = requests.get(
+                "{}todos?userId={}".format(
+                    url, user)).json()
+            alltsk = len(jreq)
+            completedtsk = []
+            for t in jreq:
+                if t.get("completed") is True:
+                    completedtsk.append(t)
+            count = len(completedtsk)
+            print("Employee {} is done with tasks({}/{}):"
+                  .format(name, count, alltsk))
+            for title in completedtsk:
+                print("\t {}".format(title.get("title")))
