@@ -22,5 +22,5 @@ if __name__ == "__main__":
     datas = {}
     datas[userID] = list
     filename = '{}.json'.format(userID)
-    with open(filename, mode='w', newline='') as jsonfile:
+    with open(filename, mode='w') as jsonfile:
         json.dump(datas, jsonfile)
