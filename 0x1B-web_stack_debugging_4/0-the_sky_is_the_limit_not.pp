@@ -1,7 +1,6 @@
 # Modify the maximun number of file allowed to be open
 
-file_line { 'fix--for-nginx':
-    path  => '/etc/default/nginx',
-    line  => 'ULIMIT="-n 4096"',
-    match => '^ULIMIT="-n 15"$',
+exec { 'fix-for-nginx':
+    command => "sed -i 's/15/4096/'g /etc/default/nginx",
+    path    => ['/bin', '/usr/bin'],
 }
