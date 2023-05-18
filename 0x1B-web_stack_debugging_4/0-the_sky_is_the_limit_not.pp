@@ -1,8 +1,8 @@
 # Modify the maximun number of file allowed to be open
 
 exec { 'fix-for-nginx-ulimit':
-  command => 'sed -i "s/ULIMIT=\"-n.*\"/ULIMIT=\"-n 4096\"/" /etc/default/nginx',
-  path    => ['/bin', '/usr/bin', '/usr/local/bin'],
+  path    => '/bin/',
+  command => 'sed -i "s/15/4096" /etc/default/nginx',
 }
 
 exec { 'restart':
